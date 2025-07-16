@@ -1,0 +1,16 @@
+import type { FC } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages';
+import { NotFoundPage } from './pages/not-found';
+
+export const Router: FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
