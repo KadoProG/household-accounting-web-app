@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { TableDisplay } from '@/components/DataDisplay/TableDisplay';
 import { parseCsvFile } from '@/utils/csvUtils';
 import { DropOverlay } from '@/components/DropOverlay';
@@ -9,11 +9,11 @@ export const RakutenPage = () => {
   const isDragging = useGlobalDropOverlay((file) => parseCsvFile(file, setTableData));
 
   // input[type=file]用のアップロードハンドラ
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     parseCsvFile(file, setTableData);
-  };
+  }, []);
 
   return (
     <div className="relative">
