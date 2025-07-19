@@ -4,6 +4,7 @@ import { parseCsvFile } from '@/utils/csvUtils';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import type { CustomRow } from '@/pages/rakuten/types';
+import { makeRakutenCustomValues } from './utils';
 
 export const RakutenPage = () => {
   const [tableData, setTableData] = useState<string[][]>([]);
@@ -13,14 +14,7 @@ export const RakutenPage = () => {
     const newTableData = await parseCsvFile(file);
     setTableData(newTableData);
 
-    setCustomRows(
-      newTableData[0].map((cellValue) => {
-        const customRow: CustomRow = {};
-        if (cellValue === '利用日') customRow.titleChange = () => '日付';
-        if (['新規サイン', '利用者'].includes(cellValue)) customRow.visible = false;
-        return customRow;
-      })
-    );
+    setCustomRows(makeRakutenCustomValues(newTableData[0]));
   }, []);
 
   const isDragging = useGlobalDropOverlay(handleCsvFileUpload);
