@@ -13,7 +13,6 @@ export const RakutenPage = () => {
   const handleCsvFileUpload = useCallback(async (file: File) => {
     const newTableData = await parseCsvFile(file);
     setTableData(newTableData);
-
     setCustomRows(makeRakutenCustomValues(newTableData[0]));
   }, []);
 
