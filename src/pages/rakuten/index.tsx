@@ -3,21 +3,22 @@ import { TableDisplay } from '@/components/DataDisplay/TableDisplay';
 import { parseCsvFile } from '@/utils/csvUtils';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
+import type { CustomRow } from '@/pages/rakuten/types';
 
 export const RakutenPage = () => {
   const [tableData, setTableData] = useState<string[][]>([]);
-  const [customHeaderRow, setCustomHeaderRow] = useState<{ visible: boolean }[]>([]);
-  console.log(customHeaderRow);
+  const [customRows, setCustomRows] = useState<CustomRow[]>([]);
 
   const handleCsvFileUpload = useCallback(async (file: File) => {
     const newTableData = await parseCsvFile(file);
     setTableData(newTableData);
 
-    setCustomHeaderRow(
+    setCustomRows(
       newTableData[0].map((cellValue) => {
-        console.log(cellValue);
-        if (['新規サイン'].includes(cellValue)) return { visible: false };
-        return { visible: true };
+        const customRow: CustomRow = {};
+        if (cellValue === '利用日') customRow.titleChange = () => '日付';
+        if (['新規サイン', '利用者'].includes(cellValue)) customRow.visible = false;
+        return customRow;
       })
     );
   }, []);
@@ -40,7 +41,7 @@ export const RakutenPage = () => {
       <h1>Rakuten Page</h1>
       <p>This page is dedicated to Rakuten services.</p>
       <input type="file" accept=".csv" onChange={handleFileUpload} />
-      <TableDisplay data={tableData} headerRowCustom={customHeaderRow} />
+      <TableDisplay data={tableData} customRows={customRows} />
     </div>
   );
 };
