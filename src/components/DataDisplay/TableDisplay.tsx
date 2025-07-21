@@ -5,9 +5,10 @@ import React from 'react';
 interface TableDisplayProps {
   data: string[][];
   customRows: CustomRow[];
+  hiddenDisable: boolean;
 }
 
-export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows }) => {
+export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows, hiddenDisable }) => {
   if (!data || data.length === 0) return null;
   return (
     <div className="mt-4 overflow-x-auto">
@@ -16,6 +17,7 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows }) 
           <tr>
             {data[0].map((header, idx) => {
               const customRow = customRows[idx];
+              if (customRow?.visible === false && hiddenDisable) return null;
               return (
                 <th
                   key={idx}
@@ -26,8 +28,12 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows }) 
                 >
                   {customRow?.titleChange ? (
                     <>
-                      <s className="text-xs opacity-20">{header}</s>
-                      <br />
+                      {!hiddenDisable && (
+                        <>
+                          <s className="text-xs opacity-20">{header}</s>
+                          <br />
+                        </>
+                      )}
                       {customRow.titleChange(header)}
                     </>
                   ) : (
@@ -43,6 +49,7 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows }) 
             <tr key={rowIdx}>
               {row.map((cell, cellIdx) => {
                 const customRow = customRows[cellIdx];
+                if (customRow?.visible === false && hiddenDisable) return null;
                 return (
                   <td
                     key={cellIdx}
@@ -50,8 +57,12 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows }) 
                   >
                     {customRow?.valueChange ? (
                       <>
-                        <s className="text-xs opacity-20">{cell}</s>
-                        <br />
+                        {!hiddenDisable && (
+                          <>
+                            <s className="text-xs opacity-20">{cell}</s>
+                            <br />
+                          </>
+                        )}
                         {customRow.valueChange(cell)}
                       </>
                     ) : (

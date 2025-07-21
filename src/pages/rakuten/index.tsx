@@ -42,13 +42,13 @@ export const RakutenPage = () => {
       <h1>Rakuten Page</h1>
       <p>This page is dedicated to Rakuten services.</p>
       <label className="inline-flex gap-2 p-2">
-        <span>非表示のコンテンツを表示</span>
+        <span>非表示のコンテンツを省略</span>
 
         <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
       </label>
 
       <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-bg-second p-2" />
-      <TableDisplay data={tableData} customRows={customRows} />
+      <TableDisplay data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
     </div>
   );
 };
