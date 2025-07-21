@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '@/contexts/Theme';
 import { DropdownList } from '../Inputs/DropdownList';
 
@@ -18,7 +19,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="flex min-h-screen flex-col bg-bg-base dark:bg-bg-base-dark">
       <header className="flex w-full items-center justify-between border-b border-border bg-bg-second p-4 dark:border-border-dark dark:bg-bg-second-dark">
-        <h1 className="text-xl font-bold">家計簿変換！</h1>
+        <Link
+          to="/"
+          className="rounded text-xl font-bold focus:ring-2 focus:ring-bg-info focus:outline-none"
+        >
+          <h1>家計簿変換！</h1>
+        </Link>
         <div className="w-32">
           <DropdownList
             titleLabel="テーマ変更"
