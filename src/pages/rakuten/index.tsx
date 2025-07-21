@@ -1,12 +1,13 @@
 import { useCallback, useState } from 'react';
 import { TableDisplay } from '@/components/DataDisplay/TableDisplay';
-import { parseCsvFile } from '@/utils/csvUtils';
+import { parseCsvFile, exportCsv } from '@/utils/csv';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import type { CustomRow } from '@/pages/rakuten/types';
 import { makeRakutenCustomValues } from './utils';
 import { Switch } from '@/components/Inputs/Switch';
 import AppLayout from '@/components/Layouts/AppLayout';
+import { convertTableDataForExport } from '@/utils/csv/table';
 
 export const RakutenPage = () => {
   const [tableData, setTableData] = useState<string[][]>([]);
@@ -37,6 +38,12 @@ export const RakutenPage = () => {
     [handleCsvFileUpload]
   );
 
+  // TableDisplayと同じ変換・除外ロジックでエクスポートする関数
+  const handleExportCsv = useCallback(() => {
+    const exportData = convertTableDataForExport(tableData, customRows);
+    exportCsv(exportData, 'rakuten_export.csv');
+  }, [tableData, customRows]);
+
   return (
     <AppLayout>
       <div className="relative">
@@ -50,6 +57,14 @@ export const RakutenPage = () => {
         </label>
 
         <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-bg-second p-2" />
+        <button
+          type="button"
+          className="ml-2 cursor-pointer rounded bg-bg-info px-4 py-2 text-white hover:bg-bg-info-hover dark:bg-bg-info-dark hover:dark:bg-bg-info-hover-dark"
+          onClick={handleExportCsv}
+          disabled={tableData.length === 0}
+        >
+          エクスポート
+        </button>
         <TableDisplay data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
       </div>
     </AppLayout>

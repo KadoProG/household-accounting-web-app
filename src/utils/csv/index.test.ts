@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import type { MockInstance } from 'vitest';
-import { parseCsvFile, exportCsv } from './csvUtils';
+import { parseCsvFile, exportCsv } from '.';
 
 // Fileのモック作成用
 function createMockCsvFile(content: string, name = 'test.csv', type = 'text/csv') {
