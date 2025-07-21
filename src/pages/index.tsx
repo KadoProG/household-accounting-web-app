@@ -23,9 +23,9 @@ export const HomePage = () => {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className="hover:bg-bg-second hover:text-text-primary inline-block w-full rounded-md border border-border p-2 transition-colors"
+                className="hover:text-text-primary inline-block w-full rounded-md border border-border p-2 transition-colors hover:bg-bg-second"
               >
-                {link.label} <code className="bg-bg-second rounded-full px-2">{link.path}</code>
+                {link.label} <code className="rounded-full bg-bg-second px-2">{link.path}</code>
               </Link>
             </li>
           ))}
