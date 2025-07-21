@@ -48,11 +48,10 @@ export const RakutenPage = () => {
     <AppLayout>
       <div className="relative">
         {isDragging && <DropOverlay>CSVファイルをここにドロップ</DropOverlay>}
-        <h1>Rakuten Page</h1>
-        <p>This page is dedicated to Rakuten services.</p>
+        <h1 className="text-2xl font-semibold">楽天ページ</h1>
+        <p>このページは楽天カードのcsvファイルを変換するページです。</p>
         <label className="inline-flex gap-2 p-2">
           <span>非表示のコンテンツを省略</span>
-
           <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
         </label>
 

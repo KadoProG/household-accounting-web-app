@@ -16,10 +16,10 @@ export const HomePage = () => {
   return (
     <AppLayout>
       <div className="p-4">
-        <h1>Welcome to the Household Accounting App</h1>
-        <p>This app helps you manage your household finances.</p>
+        <h1 className="text-3xl font-semibold">家計簿アプリへようこそ</h1>
+        <p>このアプリはあなたの家計管理をサポートします。</p>
         <nav className="mt-4 flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold">Navigation Links</h2>
+          <h2 className="text-2xl font-semibold">ナビゲーションリンク</h2>
           <ul className="flex flex-col gap-2">
             {links.map((link) => (
               <li key={link.path}>
