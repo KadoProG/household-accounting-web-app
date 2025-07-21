@@ -7,7 +7,12 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    include: ['./src/**/*.test.{js,jsx,ts,tsx}'],
     globals: true,
+    coverage: {
+      include: ['src/**'],
+      exclude: ['tailwind.config.js', '**/*.d.ts', '**/*{.,-}{test,spec}.*'],
+    },
   },
   resolve: {
     alias: {

@@ -31,8 +31,10 @@ export default {
         'bg-active-dark': '#2F6843',
         'bg-active-hover-dark': '#26573A',
 
-        'bg-info': '#17a2b8',
-        'bg-info-dark': '#2e7887',
+        'bg-info': '#38bdf8',
+        'bg-info-hover': '#0ea5e9',
+        'bg-info-dark': '#0369a1',
+        'bg-info-hover-dark': '#0e3a5e',
 
         'bg-success': '#63cd32',
         'bg-success-dark': '#198766',
