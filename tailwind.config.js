@@ -11,9 +11,9 @@ export default {
 
         // text
         text: '#000',
-        'text-secondary': '#666',
+        'text-second': '#666',
         'text-dark': '#DDD',
-        'text-secondary-dark': '#aaa',
+        'text-second-dark': '#aaa',
 
         // background
         'bg-base': '#FFF',

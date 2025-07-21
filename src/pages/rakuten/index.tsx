@@ -6,6 +6,7 @@ import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOver
 import type { CustomRow } from '@/pages/rakuten/types';
 import { makeRakutenCustomValues } from './utils';
 import { Switch } from '@/components/Inputs/Switch';
+import AppLayout from '@/components/Layouts/AppLayout';
 
 export const RakutenPage = () => {
   const [tableData, setTableData] = useState<string[][]>([]);
@@ -37,18 +38,20 @@ export const RakutenPage = () => {
   );
 
   return (
-    <div className="relative">
-      {isDragging && <DropOverlay>CSVファイルをここにドロップ</DropOverlay>}
-      <h1>Rakuten Page</h1>
-      <p>This page is dedicated to Rakuten services.</p>
-      <label className="inline-flex gap-2 p-2">
-        <span>非表示のコンテンツを省略</span>
+    <AppLayout>
+      <div className="relative">
+        {isDragging && <DropOverlay>CSVファイルをここにドロップ</DropOverlay>}
+        <h1>Rakuten Page</h1>
+        <p>This page is dedicated to Rakuten services.</p>
+        <label className="inline-flex gap-2 p-2">
+          <span>非表示のコンテンツを省略</span>
 
-        <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
-      </label>
+          <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
+        </label>
 
-      <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-bg-second p-2" />
-      <TableDisplay data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
-    </div>
+        <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-bg-second p-2" />
+        <TableDisplay data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
+      </div>
+    </AppLayout>
   );
 };

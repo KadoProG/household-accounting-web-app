@@ -12,7 +12,7 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows, hi
   if (!data || data.length === 0) return null;
   return (
     <div className="mt-4 overflow-x-auto">
-      <table className="min-w-full border border-gray-300">
+      <table className="min-w-full border border-border dark:border-border-dark">
         <thead>
           <tr>
             {data[0].map((header, idx) => {
@@ -22,7 +22,7 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows, hi
                 <th
                   key={idx}
                   className={cn(
-                    'border bg-gray-100 px-2 py-1',
+                    'border border-border bg-bg-active px-2 py-1 dark:border-border-dark dark:bg-bg-active-dark',
                     customRow?.visible === false && 'opacity-10'
                   )}
                 >
@@ -53,7 +53,10 @@ export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows, hi
                 return (
                   <td
                     key={cellIdx}
-                    className={cn('border px-2 py-1', customRow?.visible === false && 'opacity-10')}
+                    className={cn(
+                      'border border-border px-2 py-1 dark:border-border-dark',
+                      customRow?.visible === false && 'opacity-10'
+                    )}
                   >
                     {customRow?.valueChange ? (
                       <>
