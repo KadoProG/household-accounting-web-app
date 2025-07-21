@@ -12,6 +12,12 @@ export const RakutenPage = () => {
 
   const handleCsvFileUpload = useCallback(async (file: File) => {
     const newTableData = await parseCsvFile(file);
+    if (
+      newTableData[newTableData.length - 1]?.length === 1 &&
+      newTableData[newTableData.length - 1][0] === ''
+    ) {
+      newTableData.pop();
+    }
     setTableData(newTableData);
     setCustomRows(makeRakutenCustomValues(newTableData[0]));
   }, []);
