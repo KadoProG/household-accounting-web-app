@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { TableDisplay } from '@/components/DataDisplay/TableDisplay';
+import { CSVDataTable } from './CSVDataTable';
 import { parseCsvFile, exportCsv } from '@/utils/csv';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
@@ -46,7 +46,7 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
     [handleCsvFileUpload]
   );
 
-  // TableDisplayと同じ変換・除外ロジックでエクスポートする関数
+  // CSVDataTableと同じ変換・除外ロジックでエクスポートする関数
   const handleExportCsv = useCallback(() => {
     const exportData = convertTableDataForExport(tableData, customRows);
     exportCsv(exportData, exportFileName);
@@ -71,7 +71,7 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
       >
         エクスポート
       </button>
-      <TableDisplay data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
+      <CSVDataTable data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
     </div>
   );
 };
