@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/components/features/CSVLoader/types';
+import type { CustomRow } from '@/components/features/CSVProcessor';
 
 export const makeRakutenCustomValues = (headerValues: string[]) => {
   return headerValues.map((cellValue) => {
