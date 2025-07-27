@@ -52,6 +52,13 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
     exportCsv(exportData, exportFileName);
   }, [tableData, customRows, exportFileName]);
 
+  // 再変換処理を実行する関数
+  const handleReconvert = useCallback(() => {
+    if (tableData.length === 0) return;
+
+    setCustomRows(makeCustomValues(tableData[0]));
+  }, [tableData, makeCustomValues]);
+
   return (
     <div className="relative">
       {isDragging && <DropOverlay>CSVファイルをここにドロップ</DropOverlay>}
@@ -70,6 +77,14 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
         disabled={tableData.length === 0}
       >
         エクスポート
+      </button>
+      <button
+        type="button"
+        className="hover:bg-bg-warning-hover hover:dark:bg-bg-warning-hover-dark ml-2 cursor-pointer rounded bg-bg-warning px-4 py-2 text-white dark:bg-bg-warning-dark"
+        onClick={handleReconvert}
+        disabled={tableData.length === 0}
+      >
+        再変換
       </button>
       <CSVDataTable data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
     </div>
