@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/components/features/CSVProcessor';
+import type { CustomRow } from '@/features/CSVProcessor';
 
 export const makePayPayCustomValues = (headerValues: string[]) => {
   return headerValues.map((cellValue) => {

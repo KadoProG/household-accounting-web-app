@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/components/features/CSVProcessor';
+import type { CustomRow } from '@/features/CSVProcessor';
 
 /**
  * TableDisplayと同じ変換・除外ロジックでエクスポート用2次元配列を生成する

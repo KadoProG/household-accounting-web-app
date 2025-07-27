@@ -1,4 +1,4 @@
-import { CSVProcessor } from '@/components/features/CSVProcessor';
+import { CSVProcessor } from '@/features/CSVProcessor';
 import AppLayout from '@/components/Layouts/AppLayout';
 import { makeRakutenCustomValues } from './utils';
 
