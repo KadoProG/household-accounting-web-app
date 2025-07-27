@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/pages/rakuten/types';
+import type { CustomRow } from '@/components/features/CSVLoader/types';
 import { cn } from '@/utils/className';
 import React from 'react';
 

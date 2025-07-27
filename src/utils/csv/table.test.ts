@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import type { CustomRow } from '@/components/features/CSVLoader/types';
 import { convertTableDataForExport } from './table';
-import type { CustomRow } from '@/pages/rakuten/types';
 
 describe('convertTableDataForExport', () => {
   it('全てのカラムがvisibleな場合、ヘッダー・データがそのまま出力される', () => {

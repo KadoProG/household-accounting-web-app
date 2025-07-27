@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/pages/rakuten/types';
+import type { CustomRow } from '@/components/features/CSVLoader/types';
 
 /**
  * TableDisplayと同じ変換・除外ロジックでエクスポート用2次元配列を生成する

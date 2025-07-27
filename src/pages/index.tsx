@@ -10,6 +10,10 @@ const links = [
     label: 'Rakuten',
     path: '/rakuten',
   },
+  {
+    label: 'PayPay',
+    path: '/paypay',
+  },
 ];
 
 export const HomePage = () => {
