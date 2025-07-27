@@ -1,4 +1,5 @@
 import type { CustomRow } from '@/features/CSVProcessor';
+import { formatJapaneseDate } from '@/utils/date';
 
 export const makeRakutenCustomValues = (headerValues: string[]) => {
   return headerValues.map((cellValue) => {
@@ -39,11 +40,4 @@ export const makeRakutenCustomValues = (headerValues: string[]) => {
       customRow.visible = false;
     return customRow;
   });
-};
-
-/** 2025/07/19 → 2025年2月3日 11:48 のようなフォーマットにする関数 */
-const formatJapaneseDate = (dateStr: string): string => {
-  const [year, month, day] = dateStr.split('/').map(Number);
-  if (!year || !month || !day) return dateStr;
-  return `${year}年${month}月${day}日 00:00`;
 };
