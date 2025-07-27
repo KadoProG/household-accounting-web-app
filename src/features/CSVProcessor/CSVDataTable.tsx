@@ -1,14 +1,14 @@
-import type { CustomRow } from '@/pages/rakuten/types';
 import { cn } from '@/utils/className';
 import React from 'react';
+import type { CustomRow } from './types';
 
-interface TableDisplayProps {
+interface CSVDataTableProps {
   data: string[][];
   customRows: CustomRow[];
   hiddenDisable: boolean;
 }
 
-export const TableDisplay: React.FC<TableDisplayProps> = ({ data, customRows, hiddenDisable }) => {
+export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hiddenDisable }) => {
   if (!data || data.length === 0) return null;
   return (
     <div className="mt-4 overflow-x-auto">
