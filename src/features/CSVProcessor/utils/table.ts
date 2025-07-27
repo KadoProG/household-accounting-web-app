@@ -25,7 +25,7 @@ export const convertTableDataForExport = (
       const customRow = customRows[idx];
       if (customRow?.visible === false) return acc;
       if (customRow?.valueChange) {
-        acc.push(customRow.valueChange(cell));
+        acc.push(customRow.valueChange(cell, [tableData[0], row]));
       } else {
         acc.push(cell);
       }

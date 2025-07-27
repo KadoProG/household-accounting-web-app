@@ -66,7 +66,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                             <br />
                           </>
                         )}
-                        {customRow.valueChange(cell)}
+                        {customRow.valueChange(cell, [data[0], row])}
                       </>
                     ) : (
                       cell
