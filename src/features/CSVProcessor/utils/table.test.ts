@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { convertTableDataForExport } from './table';
-import type { CustomRow } from '@/features/CSVProcessor';
+import type { CustomRow } from '../types';
 
 describe('convertTableDataForExport', () => {
   it('全てのカラムがvisibleな場合、ヘッダー・データがそのまま出力される', () => {

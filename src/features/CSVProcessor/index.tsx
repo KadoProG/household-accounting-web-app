@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { CSVDataTable } from './CSVDataTable';
-import { parseCsvFile, exportCsv } from '@/utils/csv';
+import { parseCsvFile, exportCsv } from './utils/csv';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import { Switch } from '@/components/Inputs/Switch';
-import { convertTableDataForExport } from '@/utils/csv/table';
+import { convertTableDataForExport } from './utils/table';
 import type { CustomRow } from './types';
 
 type Props = {
