@@ -52,7 +52,7 @@ export const paypayPlan: TablePlan = {
     // 未定義の列は自動的に非表示になります
   },
 
-  // 行フィルタ（未対応だった TODO の実装）
+  // 行フィルタ
   rowFilters: [
     {
       // 1. 「ポイント、残高の獲得」「投資」の行を削除
