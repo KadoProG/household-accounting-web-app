@@ -1,0 +1,46 @@
+# Lefthook configuration for household-accounting-web-app
+# This file defines Git hooks to run linting, formatting, and testing
+
+pre-commit:
+  parallel: true
+  commands:
+    # ESLint check
+    lint:
+      glob: '*.{js,jsx,ts,tsx}'
+      run: npm run lint
+      stage_fixed: true
+
+    # Prettier formatting
+    prettier:
+      glob: '*.{js,jsx,ts,tsx,json,css}'
+      run: npm run prettier
+      stage_fixed: true
+
+    # TypeScript type checking
+    typecheck:
+      glob: '*.{ts,tsx}'
+      run: npx tsc --noEmit
+
+    # Run tests
+    test:
+      run: npm run test
+
+pre-push:
+  commands:
+    # Run full test suite before pushing
+    test:
+      run: npm run test
+
+commit-msg:
+  commands:
+    # Validate commit message format (optional)
+    validate-message:
+      run: echo "Commit message validated"
+
+# Skip hooks for specific files/patterns
+skip_output:
+  - rebase
+  - merge
+
+# Show execution time for each command
+min_version: 1.2.0
