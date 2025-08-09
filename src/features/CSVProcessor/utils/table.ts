@@ -40,7 +40,7 @@ export const convertTableDataForExport = (
   }
 
   // 行の並び替えを適用
-  let sortedRows = [...visibleRows];
+  const sortedRows = [...visibleRows];
   if (tablePlan.reorder?.rows) {
     const sortConfig = tablePlan.reorder.rows;
     if (typeof sortConfig === 'function') {
