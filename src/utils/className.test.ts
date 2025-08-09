@@ -53,7 +53,9 @@ describe('cn関数', () => {
 
   describe('条件付きクラス名', () => {
     it('真偽値に基づいてクラスを適用する', () => {
+      // eslint-disable-next-line
       expect(cn('base-class', true && 'conditional-class')).toBe('base-class conditional-class');
+      // eslint-disable-next-line
       expect(cn('base-class', false && 'conditional-class')).toBe('base-class');
     });
 
@@ -79,8 +81,7 @@ describe('cn関数', () => {
             'btn-active': isActive,
             'btn-disabled': isDisabled,
           },
-          variant === 'primary' && 'btn-primary',
-          variant === 'secondary' && 'btn-secondary'
+          variant === 'primary' && 'btn-primary'
         )
       ).toBe('btn btn-active btn-primary');
     });
@@ -98,6 +99,7 @@ describe('cn関数', () => {
     });
 
     it('配列内の条件付きクラスを処理する', () => {
+      // eslint-disable-next-line
       expect(cn(['base-class', true && 'conditional-class', false && 'hidden-class'])).toBe(
         'base-class conditional-class'
       );
@@ -114,7 +116,7 @@ describe('cn関数', () => {
     });
 
     it('数値を文字列として処理する', () => {
-      expect(cn('class-name', 123 as any)).toBe('class-name 123');
+      expect(cn('class-name', 123)).toBe('class-name 123');
     });
 
     it('非常に長いクラス名リストを処理する', () => {
@@ -160,8 +162,6 @@ describe('cn関数', () => {
           'ring-2 ring-blue-500': isSelected,
           'opacity-50': false,
         },
-        size === 'small' && 'p-2',
-        size === 'medium' && 'p-4',
         size === 'large' && 'p-6'
       );
 
