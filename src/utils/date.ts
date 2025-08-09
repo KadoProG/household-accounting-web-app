@@ -27,3 +27,28 @@ export const formatJapaneseDate = (dateStr: string): string => {
     return `${year}年${month}月${day}日 00:00`;
   }
 };
+
+/**
+ * 8桁の数字形式の日付文字列を日本語形式に変換する関数
+ *
+ * 例:
+ * - 20250505 → 2025年5月5日 00:00
+ * - 20250719 → 2025年7月19日 00:00
+ */
+export const formatNumericDateToJapanese = (dateStr: string): string => {
+  // 8桁の数字かチェック
+  if (!/^\d{8}$/.test(dateStr)) {
+    return dateStr; // 形式が正しくない場合はそのまま返す
+  }
+
+  const year = parseInt(dateStr.substring(0, 4), 10);
+  const month = parseInt(dateStr.substring(4, 6), 10);
+  const day = parseInt(dateStr.substring(6, 8), 10);
+
+  // 日付の妥当性をチェック
+  if (year < 1000 || month < 1 || month > 12 || day < 1 || day > 31) {
+    return dateStr; // 無効な日付の場合はそのまま返す
+  }
+
+  return `${year}年${month}月${day}日 00:00`;
+};
