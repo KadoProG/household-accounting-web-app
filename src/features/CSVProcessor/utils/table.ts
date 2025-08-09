@@ -24,8 +24,8 @@ export const convertTableDataForExport = (
     row.reduce<string[]>((acc, cell, idx) => {
       const customRow = customRows[idx];
       if (customRow?.visible === false) return acc;
-      if (customRow?.valueChange) {
-        acc.push(customRow.valueChange(cell, [tableData[0], row]));
+      if (customRow?.mapValue) {
+        acc.push(customRow.mapValue(cell, [tableData[0], row]));
       } else {
         acc.push(cell);
       }

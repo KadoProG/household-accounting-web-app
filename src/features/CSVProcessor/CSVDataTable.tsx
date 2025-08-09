@@ -58,7 +58,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                       customRow?.visible === false && 'opacity-10'
                     )}
                   >
-                    {customRow?.valueChange ? (
+                    {customRow?.mapValue ? (
                       <>
                         {!hiddenDisable && (
                           <>
@@ -66,7 +66,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                             <br />
                           </>
                         )}
-                        {customRow.valueChange(cell, [data[0], row])}
+                        {customRow.mapValue(cell, [data[0], row])}
                       </>
                     ) : (
                       cell

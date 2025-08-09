@@ -27,7 +27,7 @@ describe('convertTableDataForExport', () => {
     ]);
   });
 
-  it('mapTitle/valueChangeが適用される', () => {
+  it('mapTitle/mapValueが適用される', () => {
     const tableData = [
       ['A', 'B'],
       ['1', '2'],
@@ -35,7 +35,7 @@ describe('convertTableDataForExport', () => {
     const customRows: ColumnRule[] = [
       {
         mapTitle: (t) => t + '!',
-        valueChange: (v) => v + '?',
+        mapValue: (v) => v + '?',
       },
       {},
     ];
