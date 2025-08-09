@@ -85,4 +85,28 @@ describe('exportCsv', () => {
     exportCsv([], 'empty.csv');
     expect(createElementSpy).not.toHaveBeenCalled();
   });
+
+  it('SHIFT-JISエンコーディングでエクスポートできる', () => {
+    const data = [
+      ['名前', '住所', '値段'],
+      ['田中', '東京', '1000'],
+    ];
+    exportCsv(data, 'test_sjis.csv', 'SHIFT_JIS');
+    expect(createElementSpy).toHaveBeenCalledWith('a');
+    expect(appendChildSpy).toHaveBeenCalled();
+    expect(clickSpy).toHaveBeenCalled();
+    expect(removeChildSpy).toHaveBeenCalled();
+  });
+
+  it('UTF-8エンコーディングでエクスポートできる（デフォルト）', () => {
+    const data = [
+      ['名前', '住所', '値段'],
+      ['田中', '東京', '1000'],
+    ];
+    exportCsv(data, 'test_utf8.csv', 'UTF-8');
+    expect(createElementSpy).toHaveBeenCalledWith('a');
+    expect(appendChildSpy).toHaveBeenCalled();
+    expect(clickSpy).toHaveBeenCalled();
+    expect(removeChildSpy).toHaveBeenCalled();
+  });
 });
