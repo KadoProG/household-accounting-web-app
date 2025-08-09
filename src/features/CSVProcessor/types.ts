@@ -4,7 +4,7 @@ export type ColumnRule = {
    *
    * @param title その列のタイトルが入る
    */
-  titleChange?: (title: string) => string;
+  mapTitle?: (title: string) => string;
   /**
    *
    * @param value その列の値が入る

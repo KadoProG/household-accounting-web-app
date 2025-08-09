@@ -26,7 +26,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                     customRow?.visible === false && 'opacity-10'
                   )}
                 >
-                  {customRow?.titleChange ? (
+                  {customRow?.mapTitle ? (
                     <>
                       {!hiddenDisable && (
                         <>
@@ -34,7 +34,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                           <br />
                         </>
                       )}
-                      {customRow.titleChange(header)}
+                      {customRow.mapTitle(header)}
                     </>
                   ) : (
                     header

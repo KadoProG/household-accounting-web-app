@@ -21,13 +21,13 @@ export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => 
 
     // 3. 「取引日」→「日付」とする
     if (cellValue === '取引日') {
-      customRow.titleChange = () => '日付';
+      customRow.mapTitle = () => '日付';
       customRow.valueChange = (value) => formatJapaneseDate(value);
     }
 
     // 8. 「取引先」→「名前」とする
     if (cellValue === '取引先') {
-      customRow.titleChange = () => '名前';
+      customRow.mapTitle = () => '名前';
     }
 
     // 2. 「取引内容」で他人から得たものは全て「その他の収入」とする
@@ -43,7 +43,7 @@ export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => 
 
     // 5. 「金額」列を用意し、出金はマイナス、入金はプラスで入力
     if (cellValue === '出金金額（円）') {
-      customRow.titleChange = () => '金額';
+      customRow.mapTitle = () => '金額';
       customRow.valueChange = (value, titleValues) => {
         if (value === '-') {
           // 出金金額が `-` となっている場合は入金金額のセルを参照
@@ -70,7 +70,7 @@ export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => 
 
     // 6. 「取引方法」→「支払い方法」とする
     if (cellValue === '取引方法') {
-      customRow.titleChange = () => '支払い方法';
+      customRow.mapTitle = () => '支払い方法';
       // 7. 「支払い方法」を`PayPay`とする
       customRow.valueChange = () => 'PayPay';
     }

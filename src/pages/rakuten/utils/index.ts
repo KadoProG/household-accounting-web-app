@@ -6,19 +6,19 @@ export const makeRakutenCustomValues = (headerValues: string[]) => {
     const customRow: ColumnRule = {};
     if (cellValue === '利用日') {
       // 1. 「利用日」→「日付」と名称変更
-      customRow.titleChange = () => '日付';
+      customRow.mapTitle = () => '日付';
       // 2. 「日付」→フォーマットを 2025年2月3日 11:48 のようにする
       customRow.valueChange = (value) => formatJapaneseDate(value);
     }
 
     // 3. 「利用店名・商品名」→「名前」にする
     if (cellValue === '利用店名・商品名') {
-      customRow.titleChange = () => '名前';
+      customRow.mapTitle = () => '名前';
     }
 
     if (cellValue === '支払総額') {
       // 4. 「支払総額」→「金額」にする
-      customRow.titleChange = () => '金額';
+      customRow.mapTitle = () => '金額';
       // 5. 「金額」→全てマイナスにする
       customRow.valueChange = (value) => {
         const intValue = Number(value);
@@ -30,7 +30,7 @@ export const makeRakutenCustomValues = (headerValues: string[]) => {
     }
     // 6. 「支払方法」→「支払い方法」とし、値を「楽天クレカ」とする
     if (cellValue === '支払方法') {
-      customRow.titleChange = () => '支払い方法';
+      customRow.mapTitle = () => '支払い方法';
       customRow.valueChange = () => '楽天クレカ';
     }
 

@@ -12,8 +12,8 @@ export const convertTableDataForExport = (
   const exportHeader = tableData[0].reduce<string[]>((acc, header, idx) => {
     const customRow = customRows[idx];
     if (customRow?.visible === false) return acc;
-    if (customRow?.titleChange) {
-      acc.push(customRow.titleChange(header));
+    if (customRow?.mapTitle) {
+      acc.push(customRow.mapTitle(header));
     } else {
       acc.push(header);
     }
