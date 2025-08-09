@@ -1,25 +1,25 @@
 import { describe, expect, it } from 'vitest';
 import { convertTableDataForExport } from './table';
-import type { CustomRow } from '../types';
+import type { ColumnRule } from '../types';
 
 describe('convertTableDataForExport', () => {
-  it('全てのカラムがvisibleな場合、ヘッダー・データがそのまま出力される', () => {
+  it('全てのカラムがhidden: trueでない場合、ヘッダー・データがそのまま出力される', () => {
     const tableData = [
       ['A', 'B', 'C'],
       ['1', '2', '3'],
       ['4', '5', '6'],
     ];
-    const customRows: CustomRow[] = [{}, {}, {}];
+    const customRows: ColumnRule[] = [{}, {}, {}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual(tableData);
   });
 
-  it('visible: falseのカラムは除外される', () => {
+  it('hidden: trueのカラムは除外される', () => {
     const tableData = [
       ['A', 'B', 'C'],
       ['1', '2', '3'],
       ['4', '5', '6'],
     ];
-    const customRows: CustomRow[] = [{ visible: false }, {}, {}];
+    const customRows: ColumnRule[] = [{ hidden: true }, {}, {}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual([
       ['B', 'C'],
       ['2', '3'],
@@ -27,15 +27,15 @@ describe('convertTableDataForExport', () => {
     ]);
   });
 
-  it('titleChange/valueChangeが適用される', () => {
+  it('mapTitle/mapValueが適用される', () => {
     const tableData = [
       ['A', 'B'],
       ['1', '2'],
     ];
-    const customRows: CustomRow[] = [
+    const customRows: ColumnRule[] = [
       {
-        titleChange: (t) => t + '!',
-        valueChange: (v) => v + '?',
+        mapTitle: (t) => t + '!',
+        mapValue: (v) => v + '?',
       },
       {},
     ];
@@ -54,7 +54,7 @@ describe('convertTableDataForExport', () => {
       ['A', 'B', 'C'],
       ['1', '2', '3'],
     ];
-    const customRows: CustomRow[] = [{}];
+    const customRows: ColumnRule[] = [{}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual(tableData);
   });
 });

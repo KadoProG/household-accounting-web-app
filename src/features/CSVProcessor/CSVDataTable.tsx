@@ -1,10 +1,10 @@
 import { cn } from '@/utils/className';
 import React from 'react';
-import type { CustomRow } from './types';
+import type { ColumnRule } from './types';
 
 interface CSVDataTableProps {
   data: string[][];
-  customRows: CustomRow[];
+  customRows: ColumnRule[];
   hiddenDisable: boolean;
 }
 
@@ -17,16 +17,16 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
           <tr>
             {data[0].map((header, idx) => {
               const customRow = customRows[idx];
-              if (customRow?.visible === false && hiddenDisable) return null;
+              if (customRow?.hidden === true && hiddenDisable) return null;
               return (
                 <th
                   key={idx}
                   className={cn(
                     'border border-border bg-bg-active px-2 py-1 dark:border-border-dark dark:bg-bg-active-dark',
-                    customRow?.visible === false && 'opacity-10'
+                    customRow?.hidden === true && 'opacity-10'
                   )}
                 >
-                  {customRow?.titleChange ? (
+                  {customRow?.mapTitle ? (
                     <>
                       {!hiddenDisable && (
                         <>
@@ -34,7 +34,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                           <br />
                         </>
                       )}
-                      {customRow.titleChange(header)}
+                      {customRow.mapTitle(header)}
                     </>
                   ) : (
                     header
@@ -49,16 +49,16 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
             <tr key={rowIdx}>
               {row.map((cell, cellIdx) => {
                 const customRow = customRows[cellIdx];
-                if (customRow?.visible === false && hiddenDisable) return null;
+                if (customRow?.hidden === true && hiddenDisable) return null;
                 return (
                   <td
                     key={cellIdx}
                     className={cn(
                       'border border-border px-2 py-1 dark:border-border-dark',
-                      customRow?.visible === false && 'opacity-10'
+                      customRow?.hidden === true && 'opacity-10'
                     )}
                   >
-                    {customRow?.valueChange ? (
+                    {customRow?.mapValue ? (
                       <>
                         {!hiddenDisable && (
                           <>
@@ -66,7 +66,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                             <br />
                           </>
                         )}
-                        {customRow.valueChange(cell, [data[0], row])}
+                        {customRow.mapValue(cell, [data[0], row])}
                       </>
                     ) : (
                       cell

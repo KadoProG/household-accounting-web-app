@@ -5,18 +5,18 @@ import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import { Switch } from '@/components/Inputs/Switch';
 import { convertTableDataForExport } from './utils/table';
-import type { CustomRow } from './types';
+import type { ColumnRule } from './types';
 
 type Props = {
   title: string;
   description: string;
   exportFileName: string;
-  makeCustomValues: (headerValues: string[]) => CustomRow[];
+  makeCustomValues: (headerValues: string[]) => ColumnRule[];
 };
 
 export const CSVProcessor = ({ title, description, exportFileName, makeCustomValues }: Props) => {
   const [tableData, setTableData] = useState<string[][]>([]);
-  const [customRows, setCustomRows] = useState<CustomRow[]>([]);
+  const [customRows, setCustomRows] = useState<ColumnRule[]>([]);
   const [hiddenDisable, setHiddenDisable] = useState<boolean>(false);
 
   const handleCsvFileUpload = useCallback(
@@ -92,4 +92,4 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
 };
 
 // 型定義もエクスポート
-export type { CustomRow } from './types';
+export type { ColumnRule } from './types';
