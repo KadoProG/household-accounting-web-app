@@ -10,6 +10,7 @@ export const RakutenBankPage = () => {
         description="このページは楽天銀行のcsvファイルを変換するページです。"
         exportFileName="rakuten_bank_export.csv"
         tablePlan={rakutenBankPlan}
+        encoding="SHIFT_JIS"
       />
     </AppLayout>
   );

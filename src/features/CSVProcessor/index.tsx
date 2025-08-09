@@ -12,9 +12,16 @@ type Props = {
   description: string;
   exportFileName: string;
   tablePlan: TablePlan;
+  encoding?: 'UTF-8' | 'SHIFT_JIS';
 };
 
-export const CSVProcessor = ({ title, description, exportFileName, tablePlan }: Props) => {
+export const CSVProcessor = ({
+  title,
+  description,
+  exportFileName,
+  tablePlan,
+  encoding = 'UTF-8',
+}: Props) => {
   const [tableData, setTableData] = useState<string[][]>([]);
   const [customRows, setCustomRows] = useState<TablePlan>({ columns: {} });
   const [hiddenDisable, setHiddenDisable] = useState<boolean>(false);
@@ -50,8 +57,8 @@ export const CSVProcessor = ({ title, description, exportFileName, tablePlan }: 
   // CSVDataTableと同じ変換・除外ロジックでエクスポートする関数
   const handleExportCsv = useCallback(() => {
     const exportData = convertTableDataForExport(tableData, customRows);
-    exportCsv(exportData, exportFileName);
-  }, [tableData, customRows, exportFileName]);
+    exportCsv(exportData, exportFileName, encoding);
+  }, [tableData, customRows, exportFileName, encoding]);
 
   // 再変換処理を実行する関数
   const handleReconvert = useCallback(() => {
