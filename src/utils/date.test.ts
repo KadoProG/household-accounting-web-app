@@ -32,6 +32,16 @@ describe('formatJapaneseDate', () => {
     expect(formatJapaneseDate('2025/07/19 abc:def:ghi')).toBe('2025/07/19 abc:def:ghi');
   });
 
+  it('時刻情報を含む文字列で無効な日付部分がある場合は元の文字列を返す', () => {
+    // 16行目のテスト: 時刻情報がある場合で年、月、日がfalsy
+    expect(formatJapaneseDate('0/07/19 12:34:56')).toBe('0/07/19 12:34:56');
+    expect(formatJapaneseDate('2025/0/19 12:34:56')).toBe('2025/0/19 12:34:56');
+    expect(formatJapaneseDate('2025/07/0 12:34:56')).toBe('2025/07/0 12:34:56');
+    expect(formatJapaneseDate('abc/07/19 12:34:56')).toBe('abc/07/19 12:34:56');
+    expect(formatJapaneseDate('2025/abc/19 12:34:56')).toBe('2025/abc/19 12:34:56');
+    expect(formatJapaneseDate('2025/07/abc 12:34:56')).toBe('2025/07/abc 12:34:56');
+  });
+
   it('0を含む日付も正しく処理する', () => {
     expect(formatJapaneseDate('2025/01/01')).toBe('2025年1月1日 00:00');
     expect(formatJapaneseDate('2025/12/01')).toBe('2025年12月1日 00:00');
