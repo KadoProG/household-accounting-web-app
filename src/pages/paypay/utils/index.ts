@@ -81,7 +81,7 @@ export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => 
         cellValue
       )
     ) {
-      customRow.visible = false;
+      customRow.hidden = true;
     }
 
     return customRow;

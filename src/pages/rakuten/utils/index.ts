@@ -37,7 +37,7 @@ export const makeRakutenCustomValues = (headerValues: string[]) => {
     // 7. それ以外の項目を削除。残るのは、「日付（利用日）」「名前（利用店名・商品名）」「金額（支払総額）」「支払い方法（支払方法）」
     // if (isMonthCarryOverBalance(cellValue)) customRow.visible = false;
     if (!['利用日', '利用店名・商品名', '支払総額', '支払方法'].includes(cellValue))
-      customRow.visible = false;
+      customRow.hidden = true;
     return customRow;
   });
 };
