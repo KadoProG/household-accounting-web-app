@@ -17,13 +17,13 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
           <tr>
             {data[0].map((header, idx) => {
               const customRow = customRows[idx];
-              if (customRow?.visible === false && hiddenDisable) return null;
+              if (customRow?.hidden === true && hiddenDisable) return null;
               return (
                 <th
                   key={idx}
                   className={cn(
                     'border border-border bg-bg-active px-2 py-1 dark:border-border-dark dark:bg-bg-active-dark',
-                    customRow?.visible === false && 'opacity-10'
+                    customRow?.hidden === true && 'opacity-10'
                   )}
                 >
                   {customRow?.mapTitle ? (
@@ -49,13 +49,13 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
             <tr key={rowIdx}>
               {row.map((cell, cellIdx) => {
                 const customRow = customRows[cellIdx];
-                if (customRow?.visible === false && hiddenDisable) return null;
+                if (customRow?.hidden === true && hiddenDisable) return null;
                 return (
                   <td
                     key={cellIdx}
                     className={cn(
                       'border border-border px-2 py-1 dark:border-border-dark',
-                      customRow?.visible === false && 'opacity-10'
+                      customRow?.hidden === true && 'opacity-10'
                     )}
                   >
                     {customRow?.mapValue ? (

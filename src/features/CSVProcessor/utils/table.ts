@@ -11,7 +11,7 @@ export const convertTableDataForExport = (
   // 変換後のヘッダー
   const exportHeader = tableData[0].reduce<string[]>((acc, header, idx) => {
     const customRow = customRows[idx];
-    if (customRow?.visible === false) return acc;
+    if (customRow?.hidden === true) return acc;
     if (customRow?.mapTitle) {
       acc.push(customRow.mapTitle(header));
     } else {
@@ -23,7 +23,7 @@ export const convertTableDataForExport = (
   const exportBody = tableData.slice(1).map((row) =>
     row.reduce<string[]>((acc, cell, idx) => {
       const customRow = customRows[idx];
-      if (customRow?.visible === false) return acc;
+      if (customRow?.hidden === true) return acc;
       if (customRow?.mapValue) {
         acc.push(customRow.mapValue(cell, [tableData[0], row]));
       } else {

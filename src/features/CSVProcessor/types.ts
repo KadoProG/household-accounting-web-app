@@ -1,5 +1,5 @@
 export type ColumnRule = {
-  visible?: boolean;
+  hidden?: boolean;
   /**
    *
    * @param title その列のタイトルが入る
