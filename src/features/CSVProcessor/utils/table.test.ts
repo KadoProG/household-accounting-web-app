@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { convertTableDataForExport } from './table';
-import type { CustomRow } from '../types';
+import type { ColumnRule } from '../types';
 
 describe('convertTableDataForExport', () => {
   it('全てのカラムがvisibleな場合、ヘッダー・データがそのまま出力される', () => {
@@ -9,7 +9,7 @@ describe('convertTableDataForExport', () => {
       ['1', '2', '3'],
       ['4', '5', '6'],
     ];
-    const customRows: CustomRow[] = [{}, {}, {}];
+    const customRows: ColumnRule[] = [{}, {}, {}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual(tableData);
   });
 
@@ -19,7 +19,7 @@ describe('convertTableDataForExport', () => {
       ['1', '2', '3'],
       ['4', '5', '6'],
     ];
-    const customRows: CustomRow[] = [{ visible: false }, {}, {}];
+    const customRows: ColumnRule[] = [{ visible: false }, {}, {}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual([
       ['B', 'C'],
       ['2', '3'],
@@ -32,7 +32,7 @@ describe('convertTableDataForExport', () => {
       ['A', 'B'],
       ['1', '2'],
     ];
-    const customRows: CustomRow[] = [
+    const customRows: ColumnRule[] = [
       {
         titleChange: (t) => t + '!',
         valueChange: (v) => v + '?',
@@ -54,7 +54,7 @@ describe('convertTableDataForExport', () => {
       ['A', 'B', 'C'],
       ['1', '2', '3'],
     ];
-    const customRows: CustomRow[] = [{}];
+    const customRows: ColumnRule[] = [{}];
     expect(convertTableDataForExport(tableData, customRows)).toEqual(tableData);
   });
 });

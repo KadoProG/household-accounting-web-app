@@ -1,4 +1,4 @@
-export type CustomRow = {
+export type ColumnRule = {
   visible?: boolean;
   /**
    *

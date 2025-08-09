@@ -1,9 +1,9 @@
-import type { CustomRow } from '@/features/CSVProcessor';
+import type { ColumnRule } from '@/features/CSVProcessor';
 import { formatJapaneseDate } from '@/utils/date';
 
 export const makeRakutenCustomValues = (headerValues: string[]) => {
   return headerValues.map((cellValue) => {
-    const customRow: CustomRow = {};
+    const customRow: ColumnRule = {};
     if (cellValue === '利用日') {
       // 1. 「利用日」→「日付」と名称変更
       customRow.titleChange = () => '日付';

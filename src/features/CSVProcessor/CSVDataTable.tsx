@@ -1,10 +1,10 @@
 import { cn } from '@/utils/className';
 import React from 'react';
-import type { CustomRow } from './types';
+import type { ColumnRule } from './types';
 
 interface CSVDataTableProps {
   data: string[][];
-  customRows: CustomRow[];
+  customRows: ColumnRule[];
   hiddenDisable: boolean;
 }
 

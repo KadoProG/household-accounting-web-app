@@ -1,4 +1,4 @@
-import type { CustomRow } from '@/features/CSVProcessor';
+import type { ColumnRule } from '@/features/CSVProcessor';
 import { formatJapaneseDate } from '@/utils/date';
 
 /**
@@ -15,9 +15,9 @@ import { formatJapaneseDate } from '@/utils/date';
  *
  * TODO 未対応箇所1つあり
  */
-export const makePayPayCustomValues = (headerValues: string[]): CustomRow[] => {
+export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => {
   return headerValues.map((cellValue) => {
-    const customRow: CustomRow = {};
+    const customRow: ColumnRule = {};
 
     // 3. 「取引日」→「日付」とする
     if (cellValue === '取引日') {
