@@ -14,6 +14,10 @@ const links = [
     label: 'PayPay',
     path: '/paypay',
   },
+  {
+    label: '楽天銀行',
+    path: '/rakuten-bank',
+  },
 ];
 
 export const HomePage = () => {

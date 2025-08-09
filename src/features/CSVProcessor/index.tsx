@@ -22,6 +22,7 @@ export const CSVProcessor = ({ title, description, exportFileName, tablePlan }: 
   const handleCsvFileUpload = useCallback(
     async (file: File) => {
       const newTableData = await parseCsvFile(file);
+      console.log(newTableData);
       if (
         newTableData[newTableData.length - 1]?.length === 1 &&
         newTableData[newTableData.length - 1][0] === ''
