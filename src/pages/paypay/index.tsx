@@ -1,6 +1,6 @@
 import { CSVProcessor } from '@/features/CSVProcessor';
 import AppLayout from '@/components/Layouts/AppLayout';
-import { makePayPayCustomValues } from './utils';
+import { paypayPlan } from './utils';
 
 export const PayPayPage = () => {
   return (
@@ -9,7 +9,7 @@ export const PayPayPage = () => {
         title="PayPayページ"
         description="このページはPayPayのcsvファイルを変換するページです。"
         exportFileName="paypay_export.csv"
-        makeCustomValues={makePayPayCustomValues}
+        tablePlan={paypayPlan}
       />
     </AppLayout>
   );

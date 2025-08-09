@@ -1,89 +1,74 @@
-import type { ColumnRule } from '@/features/CSVProcessor';
+import type { TablePlan, CellContext } from '@/features/CSVProcessor/types';
 import { formatJapaneseDate } from '@/utils/date';
 
-/**
- * PayPayに対応する変換内容作成関数
- *
- * 1. 「取引内容」が「ポイント、残高の獲得」「投資」の行を削除（←未対応）
- * 2. 「取引内容」で他人から得たものは全て「その他の収入」とする
- * 3. 「取引日」→「日付」とする
- * 4. 「日付」を `2025年2月3日 11:48` フォーマットにする
- * 5. 「金額」列を用意し、出金はマイナス、入金はプラスで入力
- * 6. 「取引方法」→「支払い方法」とする
- * 7. 「支払い方法」を`PayPay`とする
- * 8. 「取引先」→「名前」とする
- *
- * TODO 未対応箇所1つあり
- */
-export const makePayPayCustomValues = (headerValues: string[]): ColumnRule[] => {
-  return headerValues.map((cellValue) => {
-    const customRow: ColumnRule = {};
+export const paypayPlan: TablePlan = {
+  columns: {
+    // 3. 「取引日」→「日付」、日付フォーマット
+    取引日: {
+      mapHeader: () => '日付',
+      mapValue: (value: string) => formatJapaneseDate(value),
+    },
 
-    // 3. 「取引日」→「日付」とする
-    if (cellValue === '取引日') {
-      customRow.mapTitle = () => '日付';
-      customRow.mapValue = (value) => formatJapaneseDate(value);
-    }
+    // 8. 「取引先」→「名前」
+    取引先: {
+      mapHeader: () => '名前',
+    },
 
-    // 8. 「取引先」→「名前」とする
-    if (cellValue === '取引先') {
-      customRow.mapTitle = () => '名前';
-    }
+    // 2. 取引内容で他人から得たものは「その他の収入」
+    取引内容: {
+      mapValue: (value: string) =>
+        value.includes('振込') || value.includes('送金') || value.includes('受取')
+          ? 'その他の収入'
+          : value,
+    },
 
-    // 2. 「取引内容」で他人から得たものは全て「その他の収入」とする
-    if (cellValue === '取引内容') {
-      customRow.mapValue = (value) => {
-        // 他人から得たものの判定（例：振込、送金など）
-        if (value.includes('振込') || value.includes('送金') || value.includes('受取')) {
-          return 'その他の収入';
-        }
-        return value;
-      };
-    }
-
-    // 5. 「金額」列を用意し、出金はマイナス、入金はプラスで入力
-    if (cellValue === '出金金額（円）') {
-      customRow.mapTitle = () => '金額';
-      customRow.mapValue = (value, titleValues) => {
+    // 5. 金額列（出金はマイナス、入金はプラス）
+    '出金金額（円）': {
+      mapHeader: () => '金額',
+      mapValue: (value: string, ctx: CellContext) => {
         if (value === '-') {
-          // 出金金額が `-` となっている場合は入金金額のセルを参照
-          const depositAmountIndex = titleValues[0].findIndex(
-            (title) => title === '入金金額（円）'
-          );
-          if (depositAmountIndex === -1) return '';
-          const depositAmount = titleValues[1][depositAmountIndex];
-          const intDepositAmount = Number(depositAmount.replaceAll(',', ''));
-          if (isNaN(intDepositAmount)) {
-            return '';
-          }
-          return String(intDepositAmount);
+          const deposit = ctx.get('入金金額（円）');
+          if (!deposit) return '';
+          const n = Number(deposit.replaceAll(',', ''));
+          return Number.isFinite(n) ? String(n) : '';
         }
-        const intValue = Number(value.replaceAll(',', ''));
-        if (isNaN(intValue)) {
-          return '';
-        }
-        // 出金の場合はマイナス、入金の場合はプラス
-        // PayPayの場合、通常は出金なのでマイナスにする
-        return String(-Math.abs(intValue));
-      };
-    }
+        const n = Number(value.replaceAll(',', ''));
+        return Number.isFinite(n) ? String(-Math.abs(n)) : '';
+      },
+    },
 
-    // 6. 「取引方法」→「支払い方法」とする
-    if (cellValue === '取引方法') {
-      customRow.mapTitle = () => '支払い方法';
-      // 7. 「支払い方法」を`PayPay`とする
-      customRow.mapValue = () => 'PayPay';
-    }
+    // 6,7. 「取引方法」→「支払い方法」, 値は常に PayPay
+    取引方法: {
+      mapHeader: () => '支払い方法',
+      mapValue: () => 'PayPay',
+    },
 
-    // 必要な列以外は非表示にする
-    if (
-      !['取引日', '取引先', '取引内容', '出金金額（円）', '取引方法', '取引番号'].includes(
-        cellValue
-      )
-    ) {
-      customRow.hidden = true;
-    }
+    // 入金金額（円）列は非表示（出金金額の計算で使用されるが表示不要）
+    '入金金額（円）': {
+      hide: true,
+    },
 
-    return customRow;
-  });
+    // それ以外の列は非表示
+    // 未定義の列は自動的に非表示になります
+  },
+
+  // 行フィルタ
+  rowFilters: [
+    {
+      // 1. 「ポイント、残高の獲得」「投資」の行を削除
+      hideIf: (ctx: CellContext) => {
+        const type = ctx.get('取引内容');
+        return !!type && (type.includes('ポイント、残高の獲得') || type.includes('投資'));
+      },
+    },
+  ],
+
+  // 並べ替え（例）
+  reorder: {
+    // 列順を明示（存在しないものは末尾に温存 or 破棄は実装方針次第）
+    columns: ['日付', '名前', '取引内容', '金額', '支払い方法', '取引番号'],
+
+    // 行は日付昇順で並べる例（文字列→日付比較）
+    rows: { byHeader: '日付', direction: 'asc', as: 'date' },
+  },
 };

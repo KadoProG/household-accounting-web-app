@@ -5,18 +5,18 @@ import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import { Switch } from '@/components/Inputs/Switch';
 import { convertTableDataForExport } from './utils/table';
-import type { ColumnRule } from './types';
+import type { TablePlan } from './types';
 
 type Props = {
   title: string;
   description: string;
   exportFileName: string;
-  makeCustomValues: (headerValues: string[]) => ColumnRule[];
+  tablePlan: TablePlan;
 };
 
-export const CSVProcessor = ({ title, description, exportFileName, makeCustomValues }: Props) => {
+export const CSVProcessor = ({ title, description, exportFileName, tablePlan }: Props) => {
   const [tableData, setTableData] = useState<string[][]>([]);
-  const [customRows, setCustomRows] = useState<ColumnRule[]>([]);
+  const [customRows, setCustomRows] = useState<TablePlan>({ columns: {} });
   const [hiddenDisable, setHiddenDisable] = useState<boolean>(false);
 
   const handleCsvFileUpload = useCallback(
@@ -29,9 +29,9 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
         newTableData.pop();
       }
       setTableData(newTableData);
-      setCustomRows(makeCustomValues(newTableData[0]));
+      setCustomRows(tablePlan);
     },
-    [makeCustomValues]
+    [tablePlan]
   );
 
   const isDragging = useGlobalDropOverlay(handleCsvFileUpload);
@@ -56,8 +56,8 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
   const handleReconvert = useCallback(() => {
     if (tableData.length === 0) return;
 
-    setCustomRows(makeCustomValues(tableData[0]));
-  }, [tableData, makeCustomValues]);
+    setCustomRows(tablePlan);
+  }, [tableData, tablePlan]);
 
   return (
     <div className="relative">
@@ -86,10 +86,10 @@ export const CSVProcessor = ({ title, description, exportFileName, makeCustomVal
       >
         再変換
       </button>
-      <CSVDataTable data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
+      <CSVDataTable data={tableData} tablePlan={customRows} hiddenDisable={hiddenDisable} />
     </div>
   );
 };
 
 // 型定義もエクスポート
-export type { ColumnRule } from './types';
+export type { TablePlan, ColumnTransform, CellContext } from './types';
