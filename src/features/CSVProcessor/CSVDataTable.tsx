@@ -4,11 +4,11 @@ import type { TablePlan, CellContext } from './types';
 
 interface CSVDataTableProps {
   data: string[][];
-  customRows: TablePlan;
+  tablePlan: TablePlan;
   hiddenDisable: boolean;
 }
 
-export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hiddenDisable }) => {
+export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hiddenDisable }) => {
   if (!data || data.length === 0) return null;
 
   const headers = data[0];
@@ -27,24 +27,24 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
 
   // 行フィルタを適用して表示する行を決定
   const visibleRows = data.slice(1).filter((row, rowIndex) => {
-    if (!customRows.rowFilters || !hiddenDisable) return true;
+    if (!tablePlan.rowFilters || !hiddenDisable) return true;
 
     const ctx = createCellContext(rowIndex, row);
-    return !customRows.rowFilters.some((filter) => filter.hideIf(ctx));
+    return !tablePlan.rowFilters.some((filter) => filter.hideIf(ctx));
   });
 
   // 列の並び替えを適用
   let columnOrder = headers;
-  if (customRows.reorder?.columns) {
-    const specifiedColumns = customRows.reorder.columns.filter((col) => headers.includes(col));
-    const remainingColumns = headers.filter((h) => !customRows.reorder!.columns!.includes(h));
+  if (tablePlan.reorder?.columns) {
+    const specifiedColumns = tablePlan.reorder.columns.filter((col) => headers.includes(col));
+    const remainingColumns = headers.filter((h) => !tablePlan.reorder!.columns!.includes(h));
     columnOrder = [...specifiedColumns, ...remainingColumns];
   }
 
   // 行の並び替えを適用
   const sortedRows = [...visibleRows];
-  if (customRows.reorder?.rows) {
-    const sortConfig = customRows.reorder.rows;
+  if (tablePlan.reorder?.rows) {
+    const sortConfig = tablePlan.reorder.rows;
     if (typeof sortConfig === 'function') {
       sortedRows.sort((a, b) => {
         const ctxA = createCellContext(0, a);
@@ -80,7 +80,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
         <thead>
           <tr>
             {columnOrder.map((header) => {
-              const columnTransform = customRows.columns[header];
+              const columnTransform = tablePlan.columns[header];
               // 未定義の列は隠す
               const shouldHide = !columnTransform || columnTransform?.hide === true;
               if (shouldHide && hiddenDisable) return null;
@@ -114,7 +114,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
         <tbody>
           {sortedRows.map((row, rowIndex) => {
             // この行が本来非表示になるかチェック
-            const shouldHideRow = customRows.rowFilters?.some((filter) => {
+            const shouldHideRow = tablePlan.rowFilters?.some((filter) => {
               const ctx = createCellContext(rowIndex, row);
               return filter.hideIf(ctx);
             });
@@ -125,7 +125,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, customRows, hi
                 className={cn(shouldHideRow && !hiddenDisable && 'bg-gray-100 dark:bg-gray-800')}
               >
                 {columnOrder.map((header) => {
-                  const columnTransform = customRows.columns[header];
+                  const columnTransform = tablePlan.columns[header];
                   // 未定義の列は隠す
                   const shouldHide = !columnTransform || columnTransform?.hide === true;
                   if (shouldHide && hiddenDisable) return null;

@@ -86,7 +86,7 @@ export const CSVProcessor = ({ title, description, exportFileName, tablePlan }: 
       >
         再変換
       </button>
-      <CSVDataTable data={tableData} customRows={customRows} hiddenDisable={hiddenDisable} />
+      <CSVDataTable data={tableData} tablePlan={customRows} hiddenDisable={hiddenDisable} />
     </div>
   );
 };
