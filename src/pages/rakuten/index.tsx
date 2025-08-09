@@ -1,6 +1,6 @@
 import { CSVProcessor } from '@/features/CSVProcessor';
 import AppLayout from '@/components/Layouts/AppLayout';
-import { makeRakutenCustomValues } from './utils';
+import { rakutenPlan } from './utils';
 
 export const RakutenPage = () => {
   return (
@@ -9,7 +9,7 @@ export const RakutenPage = () => {
         title="楽天ページ"
         description="このページは楽天カードのcsvファイルを変換するページです。"
         exportFileName="rakuten_export.csv"
-        makeCustomValues={makeRakutenCustomValues}
+        tablePlan={rakutenPlan}
       />
     </AppLayout>
   );
