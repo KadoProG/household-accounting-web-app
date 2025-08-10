@@ -4,6 +4,7 @@ import { parseCsvFile, exportCsv } from './utils/csv';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 import { convertTableDataForExport } from './utils/table';
 import type { TablePlan } from './types';
 
@@ -81,22 +82,22 @@ export const CSVProcessor = ({
       </label>
 
       <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-secondary p-2" />
-      <button
-        type="button"
-        className="ml-2 cursor-pointer rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+      <Button
+        variant="default"
         onClick={handleExportCsv}
         disabled={tableData.length === 0}
+        className="ml-2"
       >
         エクスポート
-      </button>
-      <button
-        type="button"
-        className="bg-warning text-warning-foreground hover:bg-warning/90 ml-2 cursor-pointer rounded px-4 py-2"
+      </Button>
+      <Button
+        variant="secondary"
         onClick={handleReconvert}
         disabled={tableData.length === 0}
+        className="ml-2"
       >
         再変換
-      </button>
+      </Button>
       <CSVDataTable data={tableData} tablePlan={customRows} hiddenDisable={hiddenDisable} />
     </div>
   );
