@@ -76,7 +76,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
 
   return (
     <div className="mt-4 overflow-x-auto">
-      <table className="min-w-full border border-border dark:border-border-dark">
+      <table className="min-w-full border border-border">
         <thead>
           <tr>
             {columnOrder.map((header) => {
@@ -89,7 +89,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
                 <th
                   key={header}
                   className={cn(
-                    'border border-border bg-bg-active px-2 py-1 dark:border-border-dark dark:bg-bg-active-dark',
+                    'border border-border bg-accent px-2 py-1',
                     shouldHide && 'opacity-10'
                   )}
                 >
@@ -139,10 +139,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
                   return (
                     <td
                       key={header}
-                      className={cn(
-                        'border border-border px-2 py-1 dark:border-border-dark',
-                        shouldHide && 'opacity-10'
-                      )}
+                      className={cn('border border-border px-2 py-1', shouldHide && 'opacity-10')}
                     >
                       {columnTransform?.mapValue ? (
                         <>

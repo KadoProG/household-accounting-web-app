@@ -77,10 +77,10 @@ export const CSVProcessor = ({
         <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
       </label>
 
-      <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-bg-second p-2" />
+      <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-secondary p-2" />
       <button
         type="button"
-        className="ml-2 cursor-pointer rounded bg-bg-info px-4 py-2 text-white hover:bg-bg-info-hover dark:bg-bg-info-dark hover:dark:bg-bg-info-hover-dark"
+        className="ml-2 cursor-pointer rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         onClick={handleExportCsv}
         disabled={tableData.length === 0}
       >
@@ -88,7 +88,7 @@ export const CSVProcessor = ({
       </button>
       <button
         type="button"
-        className="hover:bg-bg-warning-hover hover:dark:bg-bg-warning-hover-dark ml-2 cursor-pointer rounded bg-bg-warning px-4 py-2 text-white dark:bg-bg-warning-dark"
+        className="bg-warning text-warning-foreground hover:bg-warning/90 ml-2 cursor-pointer rounded px-4 py-2"
         onClick={handleReconvert}
         disabled={tableData.length === 0}
       >

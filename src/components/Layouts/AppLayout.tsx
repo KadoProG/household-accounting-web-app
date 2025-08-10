@@ -17,11 +17,11 @@ const themeOptions = [
 const AppLayout = ({ children }: AppLayoutProps) => {
   const { theme, updateTheme } = useContext(ThemeContext);
   return (
-    <div className="flex min-h-screen flex-col bg-bg-base dark:bg-bg-base-dark">
-      <header className="flex w-full items-center justify-between border-b border-border bg-bg-second p-4 dark:border-border-dark dark:bg-bg-second-dark">
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="flex w-full items-center justify-between border-b border-border bg-secondary p-4">
         <Link
           to="/"
-          className="rounded text-xl font-bold focus:ring-2 focus:ring-bg-info focus:outline-none"
+          className="rounded text-xl font-bold focus:ring-2 focus:ring-primary focus:outline-none"
         >
           <h1>家計簿変換！</h1>
         </Link>

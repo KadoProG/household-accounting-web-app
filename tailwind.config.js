@@ -5,47 +5,45 @@ export default {
   theme: {
     extend: {
       colors: {
-        // border
-        border: '#ddd',
-        'border-dark': '#495057',
-
-        // text
-        text: '#000',
-        'text-second': '#666',
-        'text-dark': '#DDD',
-        'text-second-dark': '#aaa',
-
-        // background
-        'bg-base': '#FFF',
-        'bg-base-hover': '#F5F5F5',
-        'bg-base-dark': '#17191C',
-        'bg-base-hover-dark': '#212326',
-
-        'bg-second': '#F5F5F5',
-        'bg-second-hover': '#eee',
-        'bg-second-dark': '#444',
-        'bg-second-hover-dark': '#555',
-
-        'bg-active': '#96E3AE',
-        'bg-active-hover': '#7DC393',
-        'bg-active-dark': '#2F6843',
-        'bg-active-hover-dark': '#26573A',
-
-        'bg-info': '#38bdf8',
-        'bg-info-hover': '#0ea5e9',
-        'bg-info-dark': '#0369a1',
-        'bg-info-hover-dark': '#0e3a5e',
-
-        'bg-success': '#63cd32',
-        'bg-success-dark': '#198766',
-
-        'bg-warning': '#ffc107',
-        'bg-warning-dark': '#947a2c',
-
-        'bg-error': '#ffe6e6',
-        'bg-error-hover': '#f5a0a0',
-        'bg-error-dark': '#6e3333',
-        'bg-error-hover-dark': '#824040',
+        // shadcn/uiのカラーシステム
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       backgroundImage: {
         // スケルトンに使うグラデーション

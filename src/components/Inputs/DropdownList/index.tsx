@@ -156,7 +156,7 @@ export const DropdownList: FC<Props> = ({ titleLabel, id, options, value, setVal
         onKeyDown={onButtonKeyDown}
         ref={buttonRef}
         id="select-button"
-        className={`w-full cursor-pointer hover:bg-bg-base-hover dark:hover:bg-bg-base-hover-dark ${isOpen ? 'rounded-t' : 'rounded'} border border-border p-2 dark:border-border-dark`}
+        className={`w-full cursor-pointer hover:bg-secondary ${isOpen ? 'rounded-t' : 'rounded'} border border-border p-2`}
       >
         {options[safeSelectedIndex]?.label || ''}
       </button>
@@ -167,7 +167,7 @@ export const DropdownList: FC<Props> = ({ titleLabel, id, options, value, setVal
           tabIndex={-1}
           ref={listRef}
           onKeyDown={onOptionKeyDown}
-          className="absolute top-[calc(100%_-_1px)] max-h-[150px] w-full overflow-y-auto rounded-b border border-border bg-bg-base dark:border-border-dark dark:bg-bg-base-dark"
+          className="absolute top-[calc(100%_-_1px)] max-h-[150px] w-full overflow-y-auto rounded-b border border-border bg-background"
         >
           {options.map((option, index) => (
             <li
@@ -177,7 +177,7 @@ export const DropdownList: FC<Props> = ({ titleLabel, id, options, value, setVal
               tabIndex={highlightedIndex === index ? 0 : -1}
               onClick={() => selectOption(index)}
               onMouseEnter={() => setHighlightedIndex(index)}
-              className={`block cursor-pointer px-1 py-2 ${highlightedIndex === index ? 'bg-bg-base-hover dark:bg-bg-base-hover-dark' : ''}`}
+              className={`block cursor-pointer px-1 py-2 ${highlightedIndex === index ? 'bg-secondary' : ''}`}
             >
               {option.label}
             </li>
