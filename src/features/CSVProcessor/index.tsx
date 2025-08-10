@@ -5,6 +5,7 @@ import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { convertTableDataForExport } from './utils/table';
 import type { TablePlan } from './types';
 
@@ -81,7 +82,7 @@ export const CSVProcessor = ({
         />
       </label>
 
-      <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-secondary p-2" />
+      <Input type="file" accept=".csv" onChange={handleFileUpload} />
       <Button
         variant="default"
         onClick={handleExportCsv}
