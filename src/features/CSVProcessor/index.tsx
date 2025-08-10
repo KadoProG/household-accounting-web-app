@@ -3,7 +3,7 @@ import { CSVDataTable } from './CSVDataTable';
 import { parseCsvFile, exportCsv } from './utils/csv';
 import { DropOverlay } from '@/components/DropOverlay';
 import { useGlobalDropOverlay } from '@/components/DropOverlay/useGlobalDropOverlay';
-import { Switch } from '@/components/Inputs/Switch';
+import { Switch } from '@/components/ui/switch';
 import { convertTableDataForExport } from './utils/table';
 import type { TablePlan } from './types';
 
@@ -74,7 +74,10 @@ export const CSVProcessor = ({
       <p>{description}</p>
       <label className="inline-flex gap-2 p-2">
         <span>非表示のコンテンツを省略</span>
-        <Switch checked={hiddenDisable} onChange={() => setHiddenDisable((prev) => !prev)} />
+        <Switch
+          checked={hiddenDisable}
+          onCheckedChange={(checked: boolean) => setHiddenDisable(checked)}
+        />
       </label>
 
       <input type="file" accept=".csv" onChange={handleFileUpload} className="bg-secondary p-2" />
