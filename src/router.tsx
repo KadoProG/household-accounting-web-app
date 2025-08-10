@@ -5,6 +5,7 @@ import { NotFoundPage } from './pages/not-found';
 import { RakutenPage } from '@/pages/rakuten';
 import { PayPayPage } from './pages/paypay';
 import { RakutenBankPage } from './pages/rakuten-bank';
+import ShadcnTestPage from './pages/shadcn-test';
 
 export const Router: FC = () => {
   return (
@@ -14,6 +15,7 @@ export const Router: FC = () => {
         <Route path="/rakuten" element={<RakutenPage />} />
         <Route path="/rakuten-bank" element={<RakutenBankPage />} />
         <Route path="/paypay" element={<PayPayPage />} />
+        <Route path="/shadcn-test" element={<ShadcnTestPage />} />
 
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/404" replace />} />

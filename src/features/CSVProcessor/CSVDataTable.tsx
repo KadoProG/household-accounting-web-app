@@ -1,6 +1,14 @@
-import { cn } from '@/utils/className';
 import React from 'react';
 import type { TablePlan, CellContext } from './types';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 
 interface CSVDataTableProps {
   data: string[][];
@@ -76,9 +84,9 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
 
   return (
     <div className="mt-4 overflow-x-auto">
-      <table className="min-w-full border border-border dark:border-border-dark">
-        <thead>
-          <tr>
+      <Table>
+        <TableHeader>
+          <TableRow>
             {columnOrder.map((header) => {
               const columnTransform = tablePlan.columns[header];
               // 未定義の列は隠す
@@ -86,13 +94,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
               if (shouldHide && hiddenDisable) return null;
 
               return (
-                <th
-                  key={header}
-                  className={cn(
-                    'border border-border bg-bg-active px-2 py-1 dark:border-border-dark dark:bg-bg-active-dark',
-                    shouldHide && 'opacity-10'
-                  )}
-                >
+                <TableHead key={header} className={cn(shouldHide && 'opacity-10')}>
                   {columnTransform?.mapHeader ? (
                     <>
                       {!hiddenDisable && (
@@ -106,12 +108,12 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
                   ) : (
                     header
                   )}
-                </th>
+                </TableHead>
               );
             })}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {sortedRows.map((row, rowIndex) => {
             // この行が本来非表示になるかチェック
             const shouldHideRow = tablePlan.rowFilters?.some((filter) => {
@@ -120,7 +122,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
             });
 
             return (
-              <tr
+              <TableRow
                 key={rowIndex}
                 className={cn(shouldHideRow && !hiddenDisable && 'bg-gray-100 dark:bg-gray-800')}
               >
@@ -137,13 +139,7 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
                   ctx.header = header;
 
                   return (
-                    <td
-                      key={header}
-                      className={cn(
-                        'border border-border px-2 py-1 dark:border-border-dark',
-                        shouldHide && 'opacity-10'
-                      )}
-                    >
+                    <TableCell key={header} className={cn(shouldHide && 'opacity-10')}>
                       {columnTransform?.mapValue ? (
                         <>
                           {!hiddenDisable && (
@@ -157,14 +153,14 @@ export const CSVDataTable: React.FC<CSVDataTableProps> = ({ data, tablePlan, hid
                       ) : (
                         cell
                       )}
-                    </td>
+                    </TableCell>
                   );
                 })}
-              </tr>
+              </TableRow>
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };

@@ -16,7 +16,7 @@ export const NotFoundPage: FC = () => {
         <div>
           <button
             onClick={handleGoBack}
-            className="cursor-pointer rounded p-4 text-left text-xl transition hover:bg-bg-base-hover dark:hover:bg-bg-base-hover-dark"
+            className="cursor-pointer rounded p-4 text-left text-xl transition hover:bg-secondary"
           >
             前のページに戻る
           </button>
