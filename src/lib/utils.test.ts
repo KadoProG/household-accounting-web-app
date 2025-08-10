@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cn } from './className';
+import { cn } from './utils';
 
 describe('cn関数', () => {
   describe('基本的な機能', () => {

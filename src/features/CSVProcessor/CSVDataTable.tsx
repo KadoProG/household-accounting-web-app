@@ -1,4 +1,3 @@
-import { cn } from '@/utils/className';
 import React from 'react';
 import type { TablePlan, CellContext } from './types';
 import {
@@ -9,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { cn } from '@/lib/utils';
 
 interface CSVDataTableProps {
   data: string[][];
