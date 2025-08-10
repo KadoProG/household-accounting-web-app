@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Table,
@@ -18,6 +19,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export default function ShadcnTestPage() {
   return (
@@ -106,6 +115,64 @@ export default function ShadcnTestPage() {
               </TableRow>
             </TableBody>
           </Table>
+        </CardContent>
+      </Card>
+
+      {/* Switch */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Switch コンポーネント</CardTitle>
+          <CardDescription>トグルスイッチ</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <Switch id="airplane-mode" />
+            <Label htmlFor="airplane-mode">機内モード</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Switch id="wifi" defaultChecked />
+            <Label htmlFor="wifi">Wi-Fi</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Switch id="bluetooth" />
+            <Label htmlFor="bluetooth">Bluetooth</Label>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Dropdown Menu */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Dropdown Menu コンポーネント</CardTitle>
+          <CardDescription>ドロップダウンメニュー</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">オプションを開く</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>アカウント</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>プロフィール</DropdownMenuItem>
+              <DropdownMenuItem>設定</DropdownMenuItem>
+              <DropdownMenuItem>ログアウト</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary">アクション</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>ファイル操作</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>新規作成</DropdownMenuItem>
+              <DropdownMenuItem>開く</DropdownMenuItem>
+              <DropdownMenuItem>保存</DropdownMenuItem>
+              <DropdownMenuItem>印刷</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </CardContent>
       </Card>
     </div>
