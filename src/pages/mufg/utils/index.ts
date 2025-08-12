@@ -1,28 +1,37 @@
-import type { TablePlan } from '@/features/CSVProcessor/types';
+import type { CellContext, TablePlan } from '@/features/CSVProcessor/types';
+import { formatJapaneseDate } from '@/utils/date';
 
 export const mufgPlan: TablePlan = {
   columns: {
+    日付: {
+      mapHeader: () => '日付',
+      mapValue: (value: string) => formatJapaneseDate(value),
+    },
+    摘要内容: {
+      mapHeader: () => '名前',
+      mapValue: (value: string, ctx: CellContext) => {
+        const subHeaderText = ctx.get('摘要');
+        return `${subHeaderText} ${value}`;
+      },
+    },
+    支払い金額: {
+      mapHeader: () => '金額',
+      mapValue: (value: string, ctx: CellContext) => {
+        if (value === '') {
+          const depositAmount = ctx.get('預かり金額');
+          if (!depositAmount) return '';
+          const n = Number(depositAmount.replaceAll(',', ''));
+          return Number.isFinite(n) ? String(n) : '';
+        }
+        const n = Number(value.replaceAll(',', ''));
+        return Number.isFinite(n) ? String(-Math.abs(n)) : '';
+      },
+    },
+    メモ: {
+      mapHeader: () => '支払い方法',
+      mapValue: () => '三菱UFJ銀行',
+    },
     // それ以外の列は非表示
     // 未定義の列は自動的に非表示になります
   },
-
-  // // 行フィルタ
-  // rowFilters: [
-  //   {
-  //     // 1. 「ポイント、残高の獲得」「投資」の行を削除
-  //     hideIf: (ctx: CellContext) => {
-  //       const type = ctx.get('取引内容');
-  //       return !!type && (type.includes('ポイント、残高の獲得') || type.includes('投資'));
-  //     },
-  //   },
-  // ],
-
-  // // 並べ替え（例）
-  // reorder: {
-  //   // 列順を明示（存在しないものは末尾に温存 or 破棄は実装方針次第）
-  //   columns: ['日付', '名前', '取引内容', '金額', '支払い方法', '取引番号'],
-
-  //   // 行は日付昇順で並べる例（文字列→日付比較）
-  //   rows: { byHeader: '日付', direction: 'asc', as: 'date' },
-  // },
 };
