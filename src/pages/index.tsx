@@ -18,6 +18,10 @@ const links = [
     label: '楽天銀行',
     path: '/rakuten-bank',
   },
+  {
+    label: '三菱UFJ',
+    path: '/mufg',
+  },
 ];
 
 export const HomePage = () => {
